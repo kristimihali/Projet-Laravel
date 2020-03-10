@@ -1,5 +1,6 @@
 @extends('layouts/main')
 
+
 @section('content')
-<h1>Articles</h1>
+You have no access. Turn to homepage.
 @endsection

@@ -29,6 +29,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function roles(){
+        return $this->belongsToMany('App\Role');
+    }
+
+    public function hasRole($role){
+        $roles = $this->roles()->where('name', $role)->count();
+        if($roles == 1){
+            return true;
+        }
+        return false;
+    }
+
     /**
      * The attributes that should be cast to native types.
      *

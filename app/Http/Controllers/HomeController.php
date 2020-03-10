@@ -20,13 +20,13 @@ class HomeController extends Controller
     public function index()
     {
         $posts = \App\Post::all(); 
-       
+        // $posts = \App\Post::orderBy('id','DESC')->paginate(3);
         return view('home',array(
             'posts' => $posts));
     }
 
     public function profile(){
-        return view('/profile/profile');
+        return view('/profile');
     }
     
 }

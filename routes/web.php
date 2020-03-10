@@ -10,17 +10,35 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/', 'HomePageController@index');
 Route::get('/articles', 'ArticlesController@index');
 Route::get('/contact', 'ContactController@index');
 Route::get('/articles/{post_name}', 'ArticlesController@show');
 
 Route::post('contact', 'ContactController@save')->name('contact.store');
 
-Auth::routes();
 
-// Route::get('/profile', 'HomeController@profile');
+
 Route::get('/', 'HomeController@index');
 Route::get('/create', 'ArticlesController@create');
 Route::get('/home', 'HomeController@index');
 
+
+Auth::routes();
+Route::group(['middleware'=>['auth']], function (){
+    
+    Route::get('/user', 'DemoController@userDemo')->name('user');
+    Route::get('nopermission', 'DemoController@permissionDenied')->name('nopermission');
+    Route::post('/create', 'ArticlesController@save')->name('articles.store');
+    Route::delete('/articles/{id}', 'ArticlesController@destroy')->name('articles.destroy');
+
+    
+    Route::group(['middleware'=>['admin']], function (){
+
+        Route::put('/update/{id}', 'ArticlesController@update')->name('admin.update');
+        Route::get('/edit/{id}', 'ArticlesController@edit')->name('admin.edit');
+        Route::patch('/edit/{id}', 'ArticlesController@edit')->name('admin.edit');
+
+        Route::get('/admin', 'DemoController@adminDemo')->name('admin');
+    });
+
+});

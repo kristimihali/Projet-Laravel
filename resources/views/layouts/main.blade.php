@@ -11,21 +11,29 @@
 	<div class="top-bar">
 		<div class="top-bar-left">
 			<ul class="menu">
+			
 				<li class="menu-text">Blog</li>
 				<li><a href="/">Home</a></li>
 				<li><a href="/articles">Articles</a></li>
 				<li><a href="contact">Contact</a></li>
 			</ul>
 		</div>
+
 		<div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-bar-right">
+				<ul class="menu">
                     @auth
-						<a href = "profile">User Profile</a>
-						<form method="POST" action="{{ route('logout') }}">
+					@if(Auth::user()->hasRole('Admin'))
+						<li><a clas='btn btn-primary btn-lg' href='/admin'>Admin</a></li>
+					@else
+					<li><a href = "/user">User Profile</a></li>
+					@endif
+							<li><form method="POST" action="{{ route('logout') }}">
 							@csrf
 							<button type="submit">Logout</button>
 						</form>
+						</li>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -33,8 +41,10 @@
                             <a href="{{ route('register') }}">Register</a>
                         @endif
                     @endauth
+					</ul>
                 </div>
             @endif
+			
 		</div>
 	</div>
     
@@ -43,6 +53,7 @@
 		<div class="row column text-center">
 			<h1>Our Blog</h1>
 			<h2 class="subheader">Such a Simple Blog Layout</h2>
+			
 		</div>
 	</div>
 
