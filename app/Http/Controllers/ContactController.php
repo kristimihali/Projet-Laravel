@@ -9,7 +9,6 @@ class ContactController extends Controller
 {
     public function store(ContactRequest $request){
         //gets handled by contactRequest 
-        
     }
 
     public function show(ContactRequest $request){
@@ -20,8 +19,7 @@ class ContactController extends Controller
         return view('contact');
     }
     function save(ContactRequest $request){
-        //Contact::
-        //print_r($request->input());
+
         $contact = new Contact;
         $contact->contact_name = $request->name;
         $contact->contact_email = $request->email;

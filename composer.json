@@ -1,4 +1,5 @@
 {
+    
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
@@ -13,14 +14,16 @@
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^1.2",
-        "laravelista/comments": "^3.3"
+        "laravelista/comments": "^3.3",
+        "laravelcollective/html": "6.16.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.9.1",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^8.0",
+        "way/generators": "^2.0"
     },
     "config": {
         "optimize-autoloader": true,
@@ -60,4 +63,5 @@
             "@php artisan key:generate --ansi"
         ]
     }
+    
 }
