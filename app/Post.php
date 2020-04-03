@@ -7,11 +7,12 @@ use Laravelista\Comments\Commentable;
 
 class Post extends Model
 {
-    //protected $table = 'posts';
-
     use Commentable;
+
+    protected $table = 'posts';
+
     public function author()
-   {
-       return $this->belongsTo('App\User','user_id');
-   }
+    {
+      return $this->belongsTo('App\User','user_id');
+    }
 }

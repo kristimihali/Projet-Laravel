@@ -29,6 +29,15 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
     public function roles(){
         return $this->belongsToMany('App\Role');
     }
@@ -42,20 +51,13 @@ class User extends Authenticatable
     }
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-     /**
     * Get the user posts'
     */
    public function posts()
    {
        return $this->hasMany('App\Post');
    }
+
    public function comments()
     {
         return $this->hasMany('Comment');
