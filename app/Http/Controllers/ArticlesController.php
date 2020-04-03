@@ -10,13 +10,17 @@ use Auth;
 
 class ArticlesController extends Controller
 {
-    function index(){
-		return view('articles');
+    function index()
+    {
+        $posts = \App\Post::all();
+		return view('articles', ['posts' => $posts]);
     }
 
-    public function show($post_name) {
-	   $post = \App\Post::where('post_name',$post_name)->first(); //get first post with post_name == $post_name
-		return view('posts/single',array( //Pass the post to the view
+    public function show($post_name)
+    {
+	   $post = \App\Post::where('post_name', $post_name)->first(); //get first post with post_name == $post_name
+
+	   return view('posts/single',array( //Pass the post to the view
 		   'post' => $post,
 	   ));
 	}
@@ -66,12 +70,14 @@ class ArticlesController extends Controller
 	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 **/
-	public function edit($id){
+	public function edit($id)
+    {
 		$post = Post::find($id);
 		return view('admin.edit')->with('post', $post);
 	}
 
-	public function update(PostRequest $request, $id){
+	public function update(PostRequest $request, $id)
+    {
 		
 		$post_id = $request->input('id');
 		$post = Post::find($id);
@@ -90,6 +96,4 @@ class ArticlesController extends Controller
         return redirect()->back()->withErrors(['Post updated successfully.']);
 
 	}
-
-	
 }
