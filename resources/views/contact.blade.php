@@ -3,12 +3,6 @@
 @section('content')
 
 <h1>Contact</h1> <br>
-    <div id = 'success'>
-        @if($errors->any())
-
-        <h6>{{$errors->first()}}</h6>
-        @endif
-    </div>
         <form method="post" class = "callout primary" action = "{{ route('contact.store') }}">
             Name: <input type="text" id="name" name="name" placeholder="Write your name" value="{{ old('name') }}">
             <div>{{ $errors->first('name') }}</div>
