@@ -10,20 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
 Route::get('/articles', 'ArticlesController@index');
 Route::get('/contact', 'ContactController@index');
 Route::get('/articles/{post_name}', 'ArticlesController@show');
-
 Route::post('contact', 'ContactController@save')->name('contact.store');
-
-
-
-Route::get('/', 'HomeController@index');
 Route::get('/create', 'ArticlesController@create');
-Route::get('/home', 'HomeController@index');
 
-
-Auth::routes();
 Route::group(['middleware'=>['auth']], function (){
     
     Route::get('/user', 'DemoController@userDemo')->name('user');
@@ -31,7 +25,6 @@ Route::group(['middleware'=>['auth']], function (){
     Route::post('/create', 'ArticlesController@save')->name('articles.store');
     Route::delete('/articles/{id}', 'ArticlesController@destroy')->name('articles.destroy');
 
-    
     Route::group(['middleware'=>['admin']], function (){
 
         Route::put('/update/{id}', 'ArticlesController@update')->name('admin.update');
@@ -40,5 +33,6 @@ Route::group(['middleware'=>['auth']], function (){
 
         Route::get('/admin', 'DemoController@adminDemo')->name('admin');
     });
-
 });
+
+Auth::routes();
