@@ -24,7 +24,9 @@ class ContactRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'name' => 'required|max:100',
+            'email' => 'required|email|max:255',
+            'message' => 'required|max:255',
         ];
     }
     //nese do te personalizosh mesazhet dhe jo te perdoresh mesazhet gjenerike, krijo funx messages 
