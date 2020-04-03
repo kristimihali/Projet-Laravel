@@ -19,6 +19,5 @@ $factory->define(App\Contact::class, function (Faker $faker) {
         'contact_name' => $faker->word(),
         'contact_email' => $faker->unique()->safeEmail,
         'contact_message' => $faker->paragraph(),
-        'contact_date' => now()
     ];
 });
