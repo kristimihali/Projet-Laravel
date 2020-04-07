@@ -14,17 +14,21 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 Route::get('/articles', 'ArticlesController@index');
 Route::get('/contact', 'ContactController@index');
-Route::get('/articles/{post_name}', 'ArticlesController@show');
+Route::get('/article/{post_name}', 'ArticlesController@show');
 Route::post('/contact', 'ContactController@save')->name('contact.store');
+Route::post('/newsletters/new', 'NewslettersController@save')->name('newsletters.new');
 
-Route::get('login/github', 'Auth\LoginController@redirectToProvider');
-Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('/login/google', 'Auth\LoginController@redirectGoogleToProvider');
+Route::get('/login/google/callback', 'Auth\LoginController@handleProviderGoogleCallback');
+
+Route::get('/login/github', 'Auth\LoginController@redirectGithubToProvider');
+Route::get('/login/github/callback', 'Auth\LoginController@handleProviderGithubCallback');
 
 Route::group(['middleware'=>['auth']], function (){
 
     Route::get('/create', 'ArticlesController@create');
-    Route::get('/user', 'DemoController@userDemo')->name('user');
-    Route::get('nopermission', 'DemoController@permissionDenied')->name('nopermission');
+    Route::get('/profile', 'UserController@index')->name('user');
+    Route::get('/nopermission', 'HomeController@permissionDenied')->name('nopermission');
 
     Route::post('/create', 'ArticlesController@save')->name('articles.store');
     Route::delete('/articles/{id}', 'ArticlesController@destroy')->name('articles.destroy');
@@ -35,7 +39,7 @@ Route::group(['middleware'=>['auth']], function (){
         Route::get('/edit/{id}', 'ArticlesController@edit')->name('admin.edit');
         Route::patch('/edit/{id}', 'ArticlesController@edit')->name('admin.edit');
 
-        Route::get('/admin', 'DemoController@adminDemo')->name('admin');
+        Route::get('/admin', 'AdminController@index')->name('admin');
     });
 });
 
