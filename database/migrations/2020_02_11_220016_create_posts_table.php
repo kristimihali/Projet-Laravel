@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->text('post_title');
             $table->string('post_status',20);
             $table->string('post_name',200);
+            $table->string('cover_image',255)->nullable();
             $table->string('post_type',20)->nullable();
             $table->text('post_category');
             $table->text('created_at');
