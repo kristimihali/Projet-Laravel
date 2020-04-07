@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
+use Socialite;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Auth;
 
 class LoginController extends Controller
 {
@@ -30,14 +31,26 @@ class LoginController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
-     * Create a new controller instance.
+     * Redirect the user to the GitHub authentication page.
      *
-     * @return void
+     * @return \Illuminate\Http\Response
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('guest')->except('logout');
-    // }
+    public function redirectToProvider()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback()
+    {
+        $user = Socialite::driver('github')->user();
+
+        // $user->token;
+    }
 
     public function authenticate(Request $request)
     {
@@ -53,14 +66,15 @@ class LoginController extends Controller
 
     public function rules()
     {
-            return [
-                'email'     => ['required', 'string', 'email'],
-                'password'  => ['required', 'string', 'min:6'],
+        return [
+            'email'     => ['required', 'string', 'email'],
+            'password'  => ['required', 'string', 'min:6'],
         ];
-    }   
-    
-    // public function logout(Request $request) {
-    //     Auth()->logout();
-    //     return redirect('/login');
-    //   }
+    }
+
+     public function logout()
+     {
+         Auth()->logout();
+         return redirect('/login');
+       }
 }
