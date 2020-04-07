@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravelista\Comments\Commentable;
+Use \TCG\Voyager\Traits\Translatable;
 
 class Post extends Model
 {
-    use Commentable;
+    use Commentable,Translatable;
 
     protected $table = 'posts';
 
