@@ -20,9 +20,10 @@ $factory->define(App\Post::class, function (Faker $faker) {
         'user_id' => $faker->randomElement($users),
         'post_content' => $faker->paragraph(),
         'post_title' => $faker->sentence(),
-        'post_status' => $faker->sentence(),
-        'post_name' => $faker->word(),
+        'post_status' => $faker->randomElement(['PUBLIED','DRAFT']),
+        'post_name' => $faker->firstName(),
         'post_type' => 'article',
-        'post_category' => $faker->word(),
+        'cover_image'  => $faker->imageUrl(),
+        'post_category' => $faker->randomElement(['vie', 'sociale', 'actualiste']),
     ];
 });
