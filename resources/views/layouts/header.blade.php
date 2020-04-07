@@ -5,45 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ config('app.name', 'Laravel') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="/">{{ config('app.name', 'Laravel') }}</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/articles">Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
 
-<div class="top-bar">
-    <div class="top-bar-left">
-        <ul class="menu">
-            <li class="menu-text">Blog</li>
-            <li><a href="/">Home</a></li>
-            <li><a href="/articles">Articles</a></li>
-            <li><a href="/contact">Contact</a></li>
-        </ul>
-    </div>
-
-    <div class="flex-center position-ref full-height">
-        @if (Route::has('login'))
-            <div class="top-bar-right">
-                <ul class="menu">
-                    @auth
-                        @if(Auth::user()->hasRole('Admin'))
-                            <li><a clas='btn btn-primary btn-lg' href='/admin'>Admin</a></li>
+                    @if (Route::has('login'))
+                        @auth
+                            <li class="nav-item">
+                                @if(Auth::user()->hasRole('Admin'))
+                                    <a clas='nav-link' href='/admin/login'>Admin</a>
+                                @else
+                                    <a class="nav-link" href="/profile">User Profile</a>
+                                @endif
+                            </li>
+                            <li class="nav-item">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button class="btn btn-danger w-10" type="submit">Logout</button>
+                                </form>
+                            </li>
                         @else
-                            <li><a href = "/user">User Profile</a></li>
-                        @endif
-                        <li><form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit">Logout</button>
-                            </form>
-                        </li>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            </li>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </ul>
-            </div>
-        @endif
-
+                            <li class="nav-item">
+                                @if (Route::has('register'))
+                                    <a class="nav-link" href="{{ route('register') }}">Register</a>
+                                @endif
+                            </li>
+                        @endauth
+                    @endif
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead" style="@yield('background-image')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>{{ config('app.name', 'Laravel') }}</h1>
+                    <span class="subheading">Simple blog by Laravel</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">

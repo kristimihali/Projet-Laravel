@@ -6,32 +6,19 @@ use Illuminate\Http\Request;
 use Auth;
 use DB;
 
-class DemoController extends Controller
+class UserController extends Controller
 {
-    public function adminDemo(){
-
-        $posts = \App\Post::all();
-        $userRoles = Auth::user()->roles->pluck('name');
-
-        if(!$userRoles->contains('Admin')){
-          
-            return redirect('/nopermission');
-        }
-        return view('/admin.dashboard',array(
-            'posts' => $posts));
-    }
-
-    public function userDemo(){
+    public function index()
+    {
         $id = Auth::user()->id;
 
-        // $posts = \App\Post::where('user_id', 13);
-        $posts = DB::select("select * from 'posts' where user_id = $id");
-        return view('/user.profile', array(
-             'posts' => $posts 
-        ));
-        // return view('/user/profile');
+        //function pas
+//        $user = \App\User::find($id);
+//        $posts = $user->posts();
+
+        $posts = DB::select(sprintf('select * from posts where user_id = %d', $id));
+
+        return view('/user.dashboard', ['posts' => $posts]);
     }
-    public function permissionDenied(){
-        return view('nopermission');
-    }
+
 }

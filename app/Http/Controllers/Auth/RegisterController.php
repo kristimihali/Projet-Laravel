@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/register';
 
     /**
      * Create a new controller instance.
@@ -49,11 +49,6 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        // return Validator::make($data, [
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
-        // ]);
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users',
@@ -79,21 +74,27 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $data=request()->validate([
+        request()->validate([
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:5|confirmed',
         ]);
-        
-        /* User::create($data); */
-        $user = new User;
-        $user->name = request()->name;
-        $user->email = request()->email;
-        $user->password = bcrypt(request()->password);
 
-        $user->save();
+        try {
+            $message = 'Register successfully.';
 
-        return redirect('home');
+            $user = new User;
+            $user->name = request()->name;
+            $user->email = request()->email;
+            $user->password = bcrypt(request()->password);
+            $user->save();
+
+            return redirect()->back()->with('success_message', $message);
+        } catch(\Exception $e) {
+            $message = $e->getMessage();
+        }
+
+        return redirect()->back()->with('error_message', $message);
      }
 
 }

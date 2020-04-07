@@ -26,9 +26,7 @@ class ArticlesController extends Controller
     {
 	   $post = \App\Post::where('post_name', $post_name)->first(); //get first post with post_name == $post_name
 
-	   return view('posts/single',array( //Pass the post to the view
-		   'post' => $post,
-	   ));
+	   return view('posts/single', ['post' => $post]);
 	}
 
 	/**

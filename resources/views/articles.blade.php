@@ -1,15 +1,23 @@
 @extends('layouts/main')
 
+@section('background-image')
+    background-image: url('images/post-bg.jpg')
+@endsection
+
 @section('content')
-
-<h1>Articles</h1>
-
-<ul>
     @foreach ($posts as $post)
-
-        <li><a href = "/articles/<?=$post->post_name?>"> {{ $post->post_title }}</a></li>
-
+        <div class="post-preview">
+            <a href="/article/{{ $post->post_name }}">
+                <h2 class="post-title">
+                    {{ $post->post_title }}
+                </h2>
+                <h3 class="post-subtitle">
+                    {{ $post->post_content }}
+                </h3>
+            </a>
+            <p class="post-meta">Posted by  {{ $post->author->name }} on {{ $post->created_at }}
+            </p>
+        </div>
+        <hr/>
     @endforeach
-</ul>
-
 @endsection

@@ -11,22 +11,6 @@
 @endif
 
 
-@auth
-    @include('comments::_form')
-@elseif(config('comments.guest_commenting') == true)
-    @include('comments::_form', [
-        'guest_commenting' => true
-    ])
-@else
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Authentication required</h5>
-            <p class="card-text">You must log in to post a comment.</p>
-            <a href="{{ route('login') }}" class="btn btn-primary">Log in</a>
-        </div>
-    </div>
-@endauth
-
 <ul class="list-unstyled">
     @php
         $comments = $comments->sortByDesc('created_at');
@@ -69,7 +53,26 @@
             @endforeach
         @endif
     @endforeach
+  <hr/>
 </ul>
+
+
+@auth
+    @include('comments::_form')
+@elseif(config('comments.guest_commenting') == true)
+    @include('comments::_form', [
+        'guest_commenting' => true
+    ])
+@else
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Authentication required</h5>
+            <p class="card-text">You must log in to post a comment.</p>
+            <a href="{{ route('login') }}" class="btn btn-primary">Log in</a>
+        </div>
+    </div>
+@endauth
+
 
 @isset ($perPage)
     {{ $grouped_comments->links() }}

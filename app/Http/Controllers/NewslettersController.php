@@ -3,21 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Newsletters;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
 
 class NewslettersController extends Controller
 {
-	public function save(PostRequest $request)
+	public function save(Request $request)
 	{
-        $this->validate($request, [
-            'newsletters_email' => 'required',
+        request()->validate([
+            'email' => 'required|email',
         ]);
 
-        $newsletters = new Newsletters;
-        $newsletters->setAttribute('newsletters_email', $request->newsletters_email);
-        $newsletters->save();
-        return redirect()->back()->withErrors(['Updated successfully.']);
+        try {
+            $message = 'Subscribe successfully.';
+
+            $newsletters = new Newsletters;
+            $newsletters->setAttribute('newsletters_email', $request->email);
+            $newsletters->save();
+            return redirect()->back()->with('success_message', $message);
+        } catch(\Exception $e) {
+            $message = $e->getMessage();
+        }
+
+        return redirect()->back()->with('error_message', $message);
 	}
 }

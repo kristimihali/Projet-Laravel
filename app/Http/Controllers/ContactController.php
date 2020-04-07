@@ -13,12 +13,20 @@ class ContactController extends Controller
 
     function save(ContactRequest $request)
     {
-        $contact = new Contact;
-        $contact->setAttribute('contact_name', $request->name);
-        $contact->setAttribute('contact_email', $request->email);
-        $contact->setAttribute('contact_message', $request->message);
-        $contact->save();
+        try {
 
-        return redirect()->back()->withErrors(['Contact saved successfully.']);;
+            $message = 'Contact saved successfully.';
+            $contact = new Contact;
+            $contact->setAttribute('contact_name', $request->name);
+            $contact->setAttribute('contact_email', $request->email);
+            $contact->setAttribute('contact_message', $request->message);
+            $contact->save();
+
+            return redirect()->back()->with('success_message', $message);
+        } catch(\Exception $e) {
+            $message = $e->getMessage();
+        }
+
+        return redirect()->back()->with('error_message', $message);
     }
 }
