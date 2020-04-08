@@ -16,19 +16,10 @@
             Menu
             <i class="fas fa-bars"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/articles">Articles</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact</a>
-                </li>
-
-                    @if (Route::has('login'))
+        <div class="collapse navbar-collapse" id="vuejs-menu">
+                <vuejs-menu></vuejs-menu>
+                <ul class="navbar-nav" >
+                @if (Route::has('login'))
                         @auth
                             <li class="nav-item">
                                 @if(Auth::user()->hasRole('Admin'))
