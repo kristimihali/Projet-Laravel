@@ -15,7 +15,7 @@ class ArticlesController extends Controller
     function index()
     {
         $posts = \App\Post::all()->where('post_status', 'PUBLIED');
-		return view('articles', ['posts' => $posts]);
+        return view('articles', ['posts' => $posts]);
     }
 
     public function create()
@@ -25,29 +25,29 @@ class ArticlesController extends Controller
 
     public function show($post_name)
     {
-	   $post = \App\Post::where('post_name', $post_name)->first();
+       $post = \App\Post::where('post_name', $post_name)->first();
 
-	   return view('posts/single', ['post' => $post]);
-	}
+       return view('posts/single', ['post' => $post]);
+    }
 
-	/**
-	 * show the for for editing the specified resource
-	 * 
-	 * @param int $id
-	 * @return \Illuminate\Http\Response
-	 **/
-	public function edit($id)
+    /**
+     * show the for for editing the specified resource
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     **/
+    public function edit($id)
     {
-		$post = Post::find($id);
-		return view('posts.edit')->with('post', $post);
-	}
+        $post = Post::find($id);
+        return view('posts.edit')->with('post', $post);
+    }
 
     public function save(PostRequest $request)
     {
         return $this->update($request, 0);
     }
 
-	public function update(PostRequest $request, $id)
+    public function update(PostRequest $request, $id)
     {
         $message = 'Post updated successfully.';
 
@@ -99,7 +99,7 @@ class ArticlesController extends Controller
             $post->post_category = $request->input('category');
 
             if($request->hasFile('cover_image')){
-                $post->cover_image = '/public/cover_images/' . $fileNameToStore;
+                $post->cover_image = '/storage/cover_images/' . $fileNameToStore;
             }
             $post->save();
 
@@ -110,7 +110,7 @@ class ArticlesController extends Controller
 
         return redirect('/profile')->with('article_error_message', $message);
 
-	}
+    }
 
     public function destroy($id)
     {
