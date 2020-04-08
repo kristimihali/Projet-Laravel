@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-       $posts = \App\Post::orderBy('id','DESC')->paginate(10);
+       $posts = \App\Post::orderBy('id','DESC')->paginate(10)->where('post_status', 'PUBLIED');;
        return view('home', ['posts' => $posts]);
     }
 

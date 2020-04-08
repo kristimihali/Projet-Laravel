@@ -1,50 +1,65 @@
 @extends('layouts/main')
 
-@section('content')
+@section('background-image')
+    background-image: url('../images/post-bg.jpg')
+@endsection
 
-    <div clas ='col-md-12'>
-        <div class = "pull-left">
+@section('content')
+    <div class="dashboard-articles">
+        <div class="pull-left">
             <marquee behavior="" direction="">CRUD ARTICLES USER PAGE</marquee>
         </div>
         <br>
-        <div class="pull-right">
-            <a href="/create" class = "btn btn-lg btn-success">Add New Article</a>
+        <div class="pull-right text-right mb-3">
+            <a href="/create" class = "btn btn-sm btn-success">Add New Article</a>
         </div>
+
+        @if(session()->has('article_success_message'))
+            <div class="alert alert-success">
+                {{ session()->get('article_success_message') }}
+            </div>
+        @elseif(session()->has('article_error_message') && session()->get('article_error_message') != '')
+            <div class="alert alert-danger">
+                {{ session()->get('article_error_message') }}
+            </div>
+        @endif
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th class="w-25">Name</th>
+                <th class="w-25">Image</th>
+                <th class="w-75">Title</th>
+                <th class="w-auto">Status</th>
+                <th class="w-auto">Category</th>
+                <th class="w-50">Operator</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($posts as $post)
+                <tr>
+                    <td>{{ $post->post_name }}</td>
+                    <td><img src="{{ $post->cover_image }}"/></td>
+                    <td>{{ $post->post_title }}</td>
+                    <td class="text-center">{{ $post->post_status }}</td>
+                    <td class="text-center">{{ $post->post_category }}</td>
+                    <td class="text-center">
+                        <form method="POST" class="mb-3" action="{{ route('article.edit',$post->id) }}">
+                            @method('PUT')
+                            @csrf
+                            <a href="/article/edit/<?=$post->id?>" class="btn btn-warning">Edit</a>
+                        </form>
+                        <a href="/article/<?=$post->post_name?>" class="btn btn-success mb-3">Show</a>
+                        <form method="post" action="{{route('article.delete',$post->id)}}">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <br/>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
-
-    @if($errors->any())
-        <h6>{{$errors->first()}}</h6>
-    @endif
-
-    <table class="table table-bordered table-dark">
-        <tr>   
-            <th>Name</th>
-            <th>Title</th>
-            <th>Status</th>
-            <th>Category</th>
-        </tr>
-
-        @foreach($posts as $post)
-        <tr>
-            <td>{{ $post->post_name }}</td>
-            <td>{{ $post->post_title }}</td>
-            <td>{{ $post->post_status }}</td>
-            <td>{{ $post->post_category }}</td>
-            
-            <td>
-            <form method="post" action="{{route('articles.destroy',$post->id)}}">
-                @method('DELETE')
-                @csrf
-                <button type="submit" class="btn btn-danger">Delete</button>
-                <a href = "/articles/<?=$post->post_name?>" class="btn btn-danger"> Show</a>
-            </form>
-            <form method="POST" action="{{ route('admin.edit',$post->id) }}">
-                @method('PUT')
-                @csrf
-                <a href = "/edit/<?=$post->id?>" class="btn btn-danger"> Edit</a>
-            </form>
-            </td>
-        </tr>
-        @endforeach
-    </table>
 @endsection

@@ -11,9 +11,12 @@
                 <h2 class="post-title">
                     {{ $post->post_title }}
                 </h2>
-                <h3 class="post-subtitle">
-                     {{ $post->post_content }}
-                </h3>
+                <div>
+                    <img src="{{ $post->cover_image }}"/>
+                    <p class="post-subtitle">
+                        {{ $post->post_content }}
+                    </p>
+                </div>
             </a>
             <p class="post-meta">Posted by  {{ $post->author->name }} on {{ $post->created_at }}
             </p>

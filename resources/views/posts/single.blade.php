@@ -9,12 +9,10 @@
         <h2 class="post-title">
             <?=$post->post_title?>
         </h2>
-        <h3 class="post-subtitle">
+        <p class="post-meta">Posted by <?=$post->author->name?> on <?=$post->created_at?></p>
+        <p><img src="{{ $post->cover_image }}"/></p>
+        <p class="post-content">
             <?=$post->post_content?>
-        </h3>
-        <p class="post-meta">Posted by
-            <?=$post->author->name?>
-            on September 24, 2019
         </p>
         <div>
              <h3>COMMENT LIST</h3>

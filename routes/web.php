@@ -26,21 +26,19 @@ Route::get('/login/github/callback', 'Auth\LoginController@handleProviderGithubC
 
 Route::group(['middleware'=>['auth']], function (){
 
-    Route::get('/create', 'ArticlesController@create');
     Route::get('/profile', 'UserController@index')->name('user');
     Route::get('/nopermission', 'HomeController@permissionDenied')->name('nopermission');
 
-    Route::post('/create', 'ArticlesController@save')->name('articles.store');
-    Route::delete('/articles/{id}', 'ArticlesController@destroy')->name('articles.destroy');
+    Route::get('/create', 'ArticlesController@create');
+    Route::post('/create', 'ArticlesController@save')->name('article.new');
 
-    Route::group(['middleware'=>['admin']], function (){
+    Route::put('/update/{id}', 'ArticlesController@update')->name('article.update');
 
-        Route::put('/update/{id}', 'ArticlesController@update')->name('admin.update');
-        Route::get('/edit/{id}', 'ArticlesController@edit')->name('admin.edit');
-        Route::patch('/edit/{id}', 'ArticlesController@edit')->name('admin.edit');
+    Route::get('/article/edit/{id}', 'ArticlesController@edit')->name('article.edit');
+    Route::patch('/article/edit/{id}', 'ArticlesController@edit')->name('article.edit');
 
-        Route::get('/admin', 'AdminController@index')->name('admin');
-    });
+    Route::delete('/article/{id}', 'ArticlesController@destroy')->name('article.delete');
+
 });
 
 Auth::routes();
