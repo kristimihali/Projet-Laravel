@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Laravelista\Comments\Commentable;
 use App\Post;
 use Auth;
+use DB;
 
 class ArticlesController extends Controller
 {
