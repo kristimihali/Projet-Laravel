@@ -12,12 +12,18 @@ footer {
   }
   .newsletters {
       .input-group {
-        max-width: 50%;
+        max-width: 60%;
         margin: 0 auto;
         input{
           height: 40px;
           line-height: 0px;
          }
+        p {
+          position: absolute;
+          top: 12px;
+          font-size: 15px;
+          left: 13px;
+        }
       }
   }
 }

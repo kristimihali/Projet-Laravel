@@ -6,6 +6,7 @@
         <div class="post-preview" v-for="item in articles">
             <a :href="'/article/'+item.post_name">
                 <h2 class="post-title"> {{ item.post_title }}</h2>
+                <p class="post-meta">Posted by {{ item.author_name }} on {{ item.created_at }}</p>
                 <div>
                     <img :src="item.cover_image"/>
                     <p class="post-subtitle">
@@ -13,7 +14,6 @@
                     </p>
                 </div>
             </a>
-            <p class="post-meta">Posted by {{ item.author_name }} on {{ item.created_at }}</p>
         </div>
         <hr/>
     </div>
