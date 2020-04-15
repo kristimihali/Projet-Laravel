@@ -1,7 +1,8 @@
 @include('layouts/header')
 
 <div class="row">
-	<div class="col-lg-8 col-md-10 mx-auto">
+	<div id="content" class="col-lg-8 col-md-10 mx-auto">
+		<router-view class="view"></router-view>
 		@yield('content')
 	</div>
 </div>

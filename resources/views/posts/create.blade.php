@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <h1>Edit Post</h1> <hr/>
+    <h1>Create Post</h1> <hr/>
 
     @if(session()->has('article_success_message'))
         <div class="alert alert-success">
