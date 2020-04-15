@@ -10,17 +10,22 @@ En autre, vous pouvez aussi visiter notre demo en ligne.
 https://projet-laravel.zhangzhao.fr
 
 **Pour les information pratiques**
-frontend: https://projet-laravel.zhangzhao.fr
-backend: https://projet-laravel.zhangzhao.fr/admin
-frontend account: user@user.com / user
-backend account: admin@admin.com / admin
+Frontend: 
+    - username: user@zhangzhao.fr
+    - password: user
+    - visite: https://projet-laravel.zhangzhao.fr
+
+Backend:
+    - username: admin@zhangzhao.fr
+    - password: admin
+    - visite: https://projet-laravel.zhangzhao.fr/admin
 
 #### Group
 MIHALI Kristi
 ZHANG Zhao
 
 #### Remarque
-On génère les images par lorempixel.com, il charge trop lente.
+On génère les image en utilisant ``Faker`` par le site https://i.picsum.photos. Cependant il n'y parfois pas de l'image sur ce site, même si on a l'url d'image.
 
 #### Requirements
 * npm / node
@@ -53,14 +58,14 @@ On génère les images par lorempixel.com, il charge trop lente.
 * [x] **Formulaire** de contact / Gestion des commentaires / Newsletters
 * [x] **CRUD** Post / Contact / Comment /Newsletters
 * [x] Fichiers **média** pour les articles
-* [x] **Identification Auth / Socialite** && Package d’administration (**Voyager**)
+* [x] **Identification Auth && Socialite** && Package d’administration (**Voyager**)
 * [x] **Seeds** Users / Post / Contact / Comment / Newsletters / MenuItem / DataTypes / DataRows / Settings 
 * [x] **Factory** Users / Post / Contact / Comment / Newsletters
-* [x] Intégration graphique responsive en utilisant **Sass** **Laravel Mix**
+* [x] Intégration graphique responsive en utilisant **Sass**  **Fontawesome** **Laravel Mix** 
 * [x] Utilisation du framework Javascript **VueJS**
+* [x] 9 - Tests unitaires (Commande: ```php artisan dusk``` pour voir le réslutat)
 
 #### Tâche non réalisé
-* [ ] 9 - Tests unitaires
 * [ ] 10 - Une application de gestion de fichiers avec catégorisation, VueJS, multi-upload,authentification
 * [ ] 11 - Un Webchat avec Pusher et Vue.js
 * [ ] 12 - Surprise!
@@ -85,7 +90,7 @@ https://projet-laravel.zhangzhao.fr/article/Mafalda(non connecté)
 <img src="https://imgur.com/cKg4Wbc.png"/>
 
 ###### Page login (Utilisateur)  - https://projet-laravel.zhangzhao.fr/login
-<img src="https://imgur.com/icpupqJ.png"/>
+<img src="https://imgur.com/plviClK.png"/>
 
 ###### Page dashboard (Utilisateur)  - https://projet-laravel.zhangzhao.fr/profile
 <img src="https://imgur.com/K3AniZt.png"/>
