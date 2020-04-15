@@ -19,11 +19,12 @@
             <p>Signup for our weekly newsletter to get the latest news, updates and amazing offers delivered directly in your inbox.</p>
                 <div class="input-group">
                     <input type="email" class="form-control" placeholder="Enter your email" name="email" required data-validation-required-message="Please enter your email.">
-                    <input type="submit" class="btn btn-primary" value="Subscribe">
                     <p class="help-block text-danger">{{ $errors->first('email') }}</p>
+                    <input type="submit" class="btn btn-primary" value="Subscribe">
                 </div>
         </form>
     </div>
+    <hr/>
     <div class="col-lg-8 col-md-10 mx-auto">
         <p class="copyright text-muted">Projet - Florian @2020</p>
     </div>

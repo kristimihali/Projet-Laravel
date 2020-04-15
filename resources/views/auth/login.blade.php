@@ -68,9 +68,10 @@
 
                 <div class="col-md-8 offset-md-2">
                     <hr class="my-4">
-                    <p class="w-100">
-                        <a href="/login/google/" class="m-auto btn btn-sm btn-google btn-block text-uppercase">Sign in with Google</a>
-                        <a href="/login/github/" class="btn btn-sm btn-github btn-block text-uppercase">Sign in with Github</a>
+                    <p class="w-100 text-center">
+                        Login with
+                        <a href="/login/google/" class="d-inline btn btn-sm btn-google btn-block text-uppercase"><i class="fab fa-google"></i></a>
+                        <a href="/login/github/" class="d-inline btn btn-sm btn-github btn-block text-uppercase"><i class="fab fa-github"></i></a>
                     </p>
                 </div>
             </div>

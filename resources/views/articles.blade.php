@@ -11,6 +11,8 @@
                 <h2 class="post-title">
                     {{ $post->post_title }}
                 </h2>
+                <p class="post-meta">Posted by  {{ $post->author->name }} on {{ $post->created_at }}
+                </p>
                 <div>
                     <img src="{{ $post->cover_image }}"/>
                     <p class="post-subtitle">
@@ -18,8 +20,10 @@
                     </p>
                 </div>
             </a>
-            <p class="post-meta">Posted by  {{ $post->author->name }} on {{ $post->created_at }}
-            </p>
+            <h3>COMMENT LIST</h3>
+            <div>
+                @comments(['model' => $post])
+            </div>
         </div>
         <hr/>
     @endforeach
