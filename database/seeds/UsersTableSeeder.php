@@ -18,14 +18,14 @@ class UsersTableSeeder extends Seeder
     {
         User::create([
             'name' => 'Administrator',
-            'email' => 'admin@admin.com',
+            'email' => 'admin@zhangzhao.fr',
             'password' => bcrypt('admin'),
             'role_id' => 1
         ]);
 
         User::create([
             'name' => 'Utilisateur',
-            'email' => 'user@user.com',
+            'email' => 'user@zhangzhao.fr',
             'password' => bcrypt('user'),
             'role_id' => 2
         ]);
